@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Results</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/style.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="text-center">
+            <h1 class="display-5">Financial Analysis Results</h1>
+        </div>
+        <div class="card shadow-sm p-4 mt-4">
+            <h4>Summary</h4>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Name:</strong> {{ name }}</li>
+                <li class="list-group-item"><strong>Total Expenses:</strong> ${{ total_expenses }}</li>
+                <li class="list-group-item"><strong>Total Earnings:</strong> ${{ earnings }}</li>
+                <li class="list-group-item"><strong>Savings:</strong> ${{ savings }}</li>
+            </ul>
+        </div>
+
+        {% if savings > 0 %}
+        <div class="mt-5">
+            <h4>Investment Allocation</h4>
+            <table class="table table-bordered">
+                <thead class="table-light">
+                    <tr>
+                        <th>Company</th>
+                        <th>Investment ($)</th>
+                        <th>Expected Return (%)</th>
+                        <th>Risk (Volatility %)</th>
+                        <th>Post-Investment Amount ($)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in investment_table %}
+                    <tr>
+                        <td>{{ row['Company'] }}</td>
+                        <td>${{ '{:,.2f}'.format(row['Investment ($)']) }}</td>
+                        <td>{{ row['Expected Return (%)'] }}%</td>
+                        <td>{{ row['Risk (Volatility %)'] }}%</td>
+                        <td>${{ '{:,.2f}'.format(row['Post-Investment Amount ($)']) }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="mt-5">
+            <h4>Visualizations</h4>
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="{{ pie_path }}" class="img-fluid rounded shadow-sm" alt="Pie Chart">
+                </div>
+                <div class="col-md-4">
+                    <img src="{{ bar_path }}" class="img-fluid rounded shadow-sm" alt="Bar Chart">
+                </div>
+                <div class="col-md-4">
+                    <img src="{{ line_path }}" class="img-fluid rounded shadow-sm" alt="Line Chart">
+                </div>
+            </div>
+        </div>
+        <div class="mt-5">
+            <h4>Additional Visualizations</h4>
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="{{ pie_expenses_path }}" class="img-fluid rounded shadow-sm" alt="Monthly Expenses Breakdown">
+                </div>
+                <div class="col-md-4">
+                    <img src="{{ bar_savings_path }}" class="img-fluid rounded shadow-sm" alt="Savings vs Total Expenses">
+                </div>
+                <div class="col-md-4">
+                    <img src="{{ line_savings_path }}" class="img-fluid rounded shadow-sm" alt="Savings Growth Over a Year">
+                </div>
+            </div>
+        </div>
+        
+        {% else %}
+        <div class="alert alert-warning mt-4" role="alert">
+            No savings available for investment.
+        </div>
+        {% endif %}
+        <div class="text-center mt-4">
+            <a href="/" class="btn btn-secondary">Enter New Data</a>
+        </div>
+    </div>
+</body>
+</html>
