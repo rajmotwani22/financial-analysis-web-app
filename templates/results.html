@@ -6,11 +6,18 @@
     <link href="/static/style.css" rel="stylesheet">
 </head>
 <body class="bg-light">
-    <div class="container mt-5">
-        <div class="text-center">
-            <h1 class="display-5">Financial Analysis Results</h1>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Financial Analysis App</a>
         </div>
-        <div class="card shadow-sm p-4 mt-4">
+    </nav>
+
+    <div class="container mt-5">
+        <div class="text-center gradient-header py-3 mb-4">
+            <h1 class="display-5 text-light">Financial Analysis Results</h1>
+        </div>
+
+        <div class="card shadow-lg p-4 fade-in">
             <h4>Summary</h4>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"><strong>Name:</strong> {{ name }}</li>
@@ -20,10 +27,9 @@
             </ul>
         </div>
 
-        {% if savings > 0 %}
-        <div class="mt-5">
+        <div class="card shadow-lg p-4 mt-5 fade-in">
             <h4>Investment Allocation</h4>
-            <table class="table table-bordered">
+            <table class="table table-hover">
                 <thead class="table-light">
                     <tr>
                         <th>Company</th>
@@ -46,43 +52,71 @@
                 </tbody>
             </table>
         </div>
-        
-        <div class="mt-5">
-            <h4>Visualizations</h4>
+
+        <div class="mt-5 fade-in">
+            <h4 class="text-center">Visualizations</h4>
             <div class="row">
                 <div class="col-md-4">
-                    <img src="{{ pie_path }}" class="img-fluid rounded shadow-sm" alt="Pie Chart">
+                    <div class="card">
+                        <img src="{{ pie_expenses_path }}" class="img-fluid rounded shadow-hover" alt="Expenses Pie Chart">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Expenses Breakdown</h5>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-4">
-                    <img src="{{ bar_path }}" class="img-fluid rounded shadow-sm" alt="Bar Chart">
+                    <div class="card">
+                        <img src="{{ bar_savings_path }}" class="img-fluid rounded shadow-hover" alt="Savings Bar Chart">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Savings Comparison</h5>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-4">
-                    <img src="{{ line_path }}" class="img-fluid rounded shadow-sm" alt="Line Chart">
+                    <div class="card">
+                        <img src="{{ line_savings_path }}" class="img-fluid rounded shadow-hover" alt="Savings Growth Line Chart">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Savings Growth Over Time</h5>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="mt-5">
-            <h4>Additional Visualizations</h4>
+
+        <div class="mt-5 fade-in">
+            <h4 class="text-center">Investment Allocation Charts</h4>
             <div class="row">
-                <div class="col-md-4">
-                    <img src="{{ pie_expenses_path }}" class="img-fluid rounded shadow-sm" alt="Monthly Expenses Breakdown">
+                <div class="col-md-6">
+                    <div class="card">
+                        <img src="{{ pie_allocation_path }}" class="img-fluid rounded shadow-hover" alt="Investment Pie Chart">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Investment Allocation</h5>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-4">
-                    <img src="{{ bar_savings_path }}" class="img-fluid rounded shadow-sm" alt="Savings vs Total Expenses">
-                </div>
-                <div class="col-md-4">
-                    <img src="{{ line_savings_path }}" class="img-fluid rounded shadow-sm" alt="Savings Growth Over a Year">
+                <div class="col-md-6">
+                    <div class="card">
+                        <img src="{{ line_allocation_path }}" class="img-fluid rounded shadow-hover" alt="Cumulative Investment Chart">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Cumulative Investment</h5>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        
-        {% else %}
-        <div class="alert alert-warning mt-4" role="alert">
-            No savings available for investment.
+
+        <div class="mt-5 fade-in">
+            <h4 class="text-center">Stock Prediction Chart</h4>
+            <div class="card">
+                <img src="{{ prediction_chart }}" class="img-fluid rounded shadow-hover" alt="Prediction Chart">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Stock Predictions for {{ ticker }}</h5>
+                </div>
+            </div>
         </div>
-        {% endif %}
-        <div class="text-center mt-4">
-            <a href="/" class="btn btn-secondary">Enter New Data</a>
+
+        <div class="text-center mt-4 fade-in">
+            <a href="/" class="btn btn-primary btn-lg shadow-hover">Enter New Data</a>
         </div>
     </div>
 </body>
